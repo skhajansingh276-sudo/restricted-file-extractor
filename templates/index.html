@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrivePDF Master | Premium Extraction Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .btn-extract {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 15px -3px var(--primary-glow);
+        }
+
+        .btn-extract:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 15px 25px -5px var(--primary-glow);
+        }
+
+        .btn-extract:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #status-area {
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .status-text {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-align: center;
+            display: block;
+        }
+
+        .download-btn {
+            display: none;
+            margin-top: 1.5rem;
+            background: #10b981;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>DrivePDF Master</h1>
+            <p class="subtitle">Premium extraction studio for restricted documents</p>
+        </header>
+
+        <div class="glass-card">
+            <div class="input-group">
+                <input type="text" id="url-input" placeholder="Paste restricted Google Drive link here..." autocomplete="off">
+            </div>
+
+            <button class="btn-extract" id="extract-btn">
+                <span class="loader" id="btn-loader"></span>
+                <span id="btn-text">Start Extraction</span>
+            </button>
+
+            <div id="status-area">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <span class="status-text" id="status-message">Initializing...</span>
+                <a href="#" class="download-btn" id="download-link">Download Perfect PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const extractBtn = document.getElementById('extract-btn');
+        const urlInput = document.getElementById('url-input');
+        const statusArea = document.getElementById('status-area');
+        const progressBar = document.getElementById('progress-bar');
+        const statusMessage = document.getElementById('status-message');
+        const downloadLink = document.getElementById('download-link');
+        const btnLoader = document.getElementById('btn-loader');
+        const btnText = document.getElementById('btn-text');
+
+        let intervalId = null;
+
+        extractBtn.addEventListener('click', async () => {
+            const url = urlInput.value.trim();
+            if (!url) return alert('Please enter a valid URL');
+
+            // Reset UI
+            extractBtn.disabled = true;
+            btnLoader.style.display = 'inline-block';
+            btnText.innerText = 'Processing...';
+            statusArea.style.display = 'block';
+            downloadLink.style.display = 'none';
+            progressBar.style.width = '0%';
+            statusMessage.innerText = 'Connecting to server...';
+
+            try {
+                const response = await fetch('/extract', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `url=${encodeURIComponent(url)}`
+                });
+
+                const data = await response.json();
+                if (data.job_id) {
+                    pollStatus(data.job_id);
+                } else {
+                    throw new Error(data.error || 'Failed to start extraction');
+                }
+            } catch (err) {
+                alert(err.message);
+                resetUI();
+            }
+        });
+
+        function pollStatus(jobId) {
+            intervalId = setInterval(async () => {
+                try {
+                    const response = await fetch(`/status/${jobId}`);
+                    const data = await response.json();
+
+                    if (data.error) {
+                        clearInterval(intervalId);
+                        alert(data.error);
+                        resetUI();
+                        return;
+                    }
+
+                    progressBar.style.width = `${data.progress}%`;
+                    statusMessage.innerText = data.status;
+
+                    if (data.status === 'Completed') {
+                        clearInterval(intervalId);
+                        statusMessage.innerText = 'Extraction Successful!';
+                        downloadLink.href = `/download/${data.file}`;
+                        downloadLink.style.display = 'block';
+                        resetUI();
+                    } else if (data.status.startsWith('Error')) {
+                        clearInterval(intervalId);
+                        statusMessage.innerText = data.status;
+                        resetUI();
+                    }
+                } catch (err) {
+                    console.error('Polling error:', err);
+                }
+            }, 1000);
+        }
+
+        function resetUI() {
+            extractBtn.disabled = false;
+            btnLoader.style.display = 'none';
+            btnText.innerText = 'Start Extraction';
+        }
+    </script>
+</body>
+</html>
