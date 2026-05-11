@@ -33,7 +33,11 @@ def drive_pdf_extractor(url, job_id):
             browserless_url = f"https://chrome.browserless.io/webdriver?token={BROWSERLESS_KEY}"
             driver = webdriver.Remote(command_executor=browserless_url, options=chrome_options)
         else:
-            # Local/Render way (will fail on Vercel without key)
+            # Check if we are on Render (which usually defines RENDER environment variable)
+            if os.environ.get("RENDER"):
+                raise Exception("BROWSERLESS_KEY is required for Render deployment. Please add it in Environment Variables.")
+            
+            # Local fallback
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
             driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
