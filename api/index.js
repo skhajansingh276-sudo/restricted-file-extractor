@@ -15,12 +15,17 @@ app.post('/extract', async (req, res) => {
     if (!url) return res.status(400).json({ error: 'URL required' });
 
     try {
-        // 1. Transform URL to mobilebasic (This bypasses many protections)
-        let targetUrl = url;
-        if (url.includes('/file/d/')) {
-            targetUrl = url.replace('/view', '').replace('/edit', '') + '/mobilebasic';
-        } else if (url.includes('/document/d/')) {
-            targetUrl = url.replace('/edit', '') + '/mobilebasic';
+        // 1. Transform URL to mobilebasic correctly
+        let targetUrl = url.split('?')[0]; // Remove query params for transformation
+        if (targetUrl.endsWith('/')) targetUrl = targetUrl.slice(0, -1);
+
+        if (targetUrl.includes('/file/d/')) {
+            targetUrl = targetUrl.replace(/\/view$/, '').replace(/\/edit$/, '') + '/mobilebasic';
+        } else if (targetUrl.includes('/document/d/')) {
+            targetUrl = targetUrl.replace(/\/edit$/, '') + '/mobilebasic';
+        } else {
+            // If it's not a standard format, just try adding /mobilebasic to the end
+            targetUrl = targetUrl.replace(/\/$/, '') + '/mobilebasic';
         }
 
         // 2. Fetch the HTML source code
