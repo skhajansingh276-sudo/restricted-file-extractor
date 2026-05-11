@@ -18,15 +18,17 @@ app.post('/extract', async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: 'URL required' });
 
+    const token = process.env.BROWSERLESS_TOKEN;
     let browser = null;
+    
     try {
-        if (BROWSERLESS_TOKEN) {
+        if (token) {
             // THE PRO WAY: Use Browserless (Guaranteed to work on Vercel)
             browser = await puppeteer.connect({
-                browserWSEndpoint: `wss://chrome.browserless.io?token=${BROWSERLESS_TOKEN}`,
+                browserWSEndpoint: `wss://chrome.browserless.io?token=${token}`,
             });
         } else {
-            // THE LOCAL WAY: (May fail on some Vercel regions due to missing libs)
+            // THE LOCAL WAY
             browser = await puppeteer.launch({
                 args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
                 defaultViewport: chromium.defaultViewport,
