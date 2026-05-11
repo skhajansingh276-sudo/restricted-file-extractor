@@ -14,9 +14,10 @@ from selenium.webdriver.common.by import By
 
 app = Flask(__name__)
 
-# Configuration
-OUTPUT_FOLDER = "outputs"
-if not os.path.exists(OUTPUT_FOLDER):
+# Cloud-friendly Configuration
+# Vercel and other cloud providers only allow writing to /tmp
+OUTPUT_FOLDER = "/tmp" if os.name != 'nt' else "outputs"
+if not os.path.exists(OUTPUT_FOLDER) and os.name == 'nt':
     os.makedirs(OUTPUT_FOLDER)
 
 # Global status tracker
@@ -33,9 +34,10 @@ def drive_pdf_extractor(url, job_id):
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
     
-    # Set WDM_LOCAL to avoid read-only errors if applicable
+    # Cloud environments often don't have Chrome in standard paths
+    # This might still fail on Vercel without a custom Buildpack
     os.environ['WDM_LOCAL'] = '1'
-    os.environ['WDM_PATH'] = os.getcwd()
+    os.environ['WDM_PATH'] = OUTPUT_FOLDER
 
     driver = None
     try:
@@ -45,7 +47,6 @@ def drive_pdf_extractor(url, job_id):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.get(url)
 
-        # Bypass Trusted Types
         driver.execute_script("""
             if (window.trustedTypes && window.trustedTypes.createPolicy) {
                 if (!window.trustedTypes.defaultPolicy) {
@@ -62,7 +63,6 @@ def drive_pdf_extractor(url, job_id):
         jobs[job_id]["status"] = "Rendering document pages..."
         jobs[job_id]["progress"] = 40
 
-        # Automated Scroll-to-Render
         for i in range(1, 15): 
             driver.execute_script(f"window.scrollTo(0, {i} * 1200);")
             time.sleep(1)
@@ -141,4 +141,6 @@ def download(filename):
     return send_file(os.path.join(OUTPUT_FOLDER, filename), as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Local run on port 5000, cloud uses environment port
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
