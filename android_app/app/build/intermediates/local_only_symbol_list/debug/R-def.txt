@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+drawable custom_progress_bar
+drawable edit_text_bg
+id btnDownload
+id btnExtract
+id btnSettings
+id progressBar
+id statusLayout
+id statusText
+id urlInput
+layout activity_main

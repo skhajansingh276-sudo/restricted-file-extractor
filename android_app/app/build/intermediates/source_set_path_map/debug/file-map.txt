@@ -1,0 +1,34 @@
+com.example.drivepdfmaster.app-cardview-1.0.0-0 C:\Users\intel\.gradle\caches\transforms-3\080c9a9f99f27925e2fc9bba6ccd6772\transformed\cardview-1.0.0\res
+com.example.drivepdfmaster.app-appcompat-1.6.1-1 C:\Users\intel\.gradle\caches\transforms-3\0d94b8c33b5e34af34547c54a338a2c9\transformed\appcompat-1.6.1\res
+com.example.drivepdfmaster.app-activity-1.8.0-2 C:\Users\intel\.gradle\caches\transforms-3\0fe7c76435d147c38f96207501a62012\transformed\activity-1.8.0\res
+com.example.drivepdfmaster.app-lifecycle-runtime-2.6.1-3 C:\Users\intel\.gradle\caches\transforms-3\10fc652aa972806436efe4b991605283\transformed\lifecycle-runtime-2.6.1\res
+com.example.drivepdfmaster.app-lifecycle-livedata-2.6.1-4 C:\Users\intel\.gradle\caches\transforms-3\27b79b4b709b36ee8e4333d22928f9c3\transformed\lifecycle-livedata-2.6.1\res
+com.example.drivepdfmaster.app-recyclerview-1.1.0-5 C:\Users\intel\.gradle\caches\transforms-3\27e9a9726d23253127a1ab31207bb254\transformed\recyclerview-1.1.0\res
+com.example.drivepdfmaster.app-viewpager2-1.0.0-6 C:\Users\intel\.gradle\caches\transforms-3\28faba72f981c13b1d8a4f90f54f5733\transformed\viewpager2-1.0.0\res
+com.example.drivepdfmaster.app-emoji2-views-helper-1.2.0-7 C:\Users\intel\.gradle\caches\transforms-3\31f0f5babf8c7b4880f591a6e08bf032\transformed\emoji2-views-helper-1.2.0\res
+com.example.drivepdfmaster.app-profileinstaller-1.3.0-8 C:\Users\intel\.gradle\caches\transforms-3\3c373e0cfb9c3b1a68c532001f53917a\transformed\profileinstaller-1.3.0\res
+com.example.drivepdfmaster.app-fragment-1.3.6-9 C:\Users\intel\.gradle\caches\transforms-3\5106cb79f855ec1d355cdb5d2c36a6dc\transformed\fragment-1.3.6\res
+com.example.drivepdfmaster.app-constraintlayout-2.1.4-10 C:\Users\intel\.gradle\caches\transforms-3\52558b2233d8431fbe112b726faf49a3\transformed\constraintlayout-2.1.4\res
+com.example.drivepdfmaster.app-appcompat-resources-1.6.1-11 C:\Users\intel\.gradle\caches\transforms-3\5f9f610d4ca2bded90aefbca6c019e81\transformed\appcompat-resources-1.6.1\res
+com.example.drivepdfmaster.app-lifecycle-viewmodel-savedstate-2.6.1-12 C:\Users\intel\.gradle\caches\transforms-3\6b424651aea2f1157846fd59444d139b\transformed\lifecycle-viewmodel-savedstate-2.6.1\res
+com.example.drivepdfmaster.app-lifecycle-viewmodel-2.6.1-13 C:\Users\intel\.gradle\caches\transforms-3\70c0bde302e63e30bc1060ec8d1f9536\transformed\lifecycle-viewmodel-2.6.1\res
+com.example.drivepdfmaster.app-core-1.12.0-14 C:\Users\intel\.gradle\caches\transforms-3\779dcb830b19d9e369683bd501855dad\transformed\core-1.12.0\res
+com.example.drivepdfmaster.app-core-runtime-2.2.0-15 C:\Users\intel\.gradle\caches\transforms-3\7c87305da46285f40ff8a92eb9dce52a\transformed\core-runtime-2.2.0\res
+com.example.drivepdfmaster.app-drawerlayout-1.1.1-16 C:\Users\intel\.gradle\caches\transforms-3\7d900b8db9c21ec4c67f7a77caea1e4c\transformed\drawerlayout-1.1.1\res
+com.example.drivepdfmaster.app-savedstate-1.2.1-17 C:\Users\intel\.gradle\caches\transforms-3\81aea59010f290c7bc7ffad90c38d4ab\transformed\savedstate-1.2.1\res
+com.example.drivepdfmaster.app-transition-1.2.0-18 C:\Users\intel\.gradle\caches\transforms-3\90faf148ce3ed053c51c6d00717f55c3\transformed\transition-1.2.0\res
+com.example.drivepdfmaster.app-material-1.11.0-19 C:\Users\intel\.gradle\caches\transforms-3\af1e56f7fa8b4025c985ed8463e0ed46\transformed\material-1.11.0\res
+com.example.drivepdfmaster.app-core-ktx-1.12.0-20 C:\Users\intel\.gradle\caches\transforms-3\b126f36e950e763333cf492dab12b530\transformed\core-ktx-1.12.0\res
+com.example.drivepdfmaster.app-emoji2-1.2.0-21 C:\Users\intel\.gradle\caches\transforms-3\bc249d29ef7fad274065aeb4c88f952c\transformed\emoji2-1.2.0\res
+com.example.drivepdfmaster.app-lifecycle-process-2.6.1-22 C:\Users\intel\.gradle\caches\transforms-3\bce4182a07834cae0b6d8e10f8816d84\transformed\lifecycle-process-2.6.1\res
+com.example.drivepdfmaster.app-lifecycle-livedata-core-2.6.1-23 C:\Users\intel\.gradle\caches\transforms-3\c5dcf7ac333f3a7960e99e1c82bdf9b5\transformed\lifecycle-livedata-core-2.6.1\res
+com.example.drivepdfmaster.app-coordinatorlayout-1.1.0-24 C:\Users\intel\.gradle\caches\transforms-3\de2023dd89f55f1db5174dbff067adf5\transformed\coordinatorlayout-1.1.0\res
+com.example.drivepdfmaster.app-startup-runtime-1.1.1-25 C:\Users\intel\.gradle\caches\transforms-3\f95a84d1b0314cc09488623eec3353ce\transformed\startup-runtime-1.1.1\res
+com.example.drivepdfmaster.app-annotation-experimental-1.3.0-26 C:\Users\intel\.gradle\caches\transforms-3\fd59f6a7558aab18e66c7ac8af44a2fc\transformed\annotation-experimental-1.3.0\res
+com.example.drivepdfmaster.app-pngs-27 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\build\generated\res\pngs\debug
+com.example.drivepdfmaster.app-resValues-28 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\build\generated\res\resValues\debug
+com.example.drivepdfmaster.app-packageDebugResources-29 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.drivepdfmaster.app-packageDebugResources-30 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.drivepdfmaster.app-merged_res-31 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\build\intermediates\merged_res\debug
+com.example.drivepdfmaster.app-debug-32 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\src\debug\res
+com.example.drivepdfmaster.app-main-33 C:\Users\intel\Desktop\RESTRICTED FILE APP\drive data copy on read mode\android_app\app\src\main\res

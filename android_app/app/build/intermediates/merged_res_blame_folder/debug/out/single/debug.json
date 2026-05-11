@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.example.drivepdfmaster.app-merged_res-31:/drawable_custom_progress_bar.xml.flat",
+        "source": "com.example.drivepdfmaster.app-main-33:/drawable/custom_progress_bar.xml"
+    },
+    {
+        "merged": "com.example.drivepdfmaster.app-merged_res-31:/drawable_edit_text_bg.xml.flat",
+        "source": "com.example.drivepdfmaster.app-main-33:/drawable/edit_text_bg.xml"
+    },
+    {
+        "merged": "com.example.drivepdfmaster.app-merged_res-31:/layout_activity_main.xml.flat",
+        "source": "com.example.drivepdfmaster.app-main-33:/layout/activity_main.xml"
+    }
+]
