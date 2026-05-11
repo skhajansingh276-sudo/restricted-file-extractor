@@ -1,16 +1,14 @@
 const express = require('express');
 const path = require('path');
-const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
-const axios = require('axios');
+const chromium = require('@sparticuz/chromium');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// In-memory job store (Note: Vercel serverless functions are stateless, 
-// so for a robust app, we'd use Redis, but for a single-file "Success" response, 
-// we will adapt the logic to return the data directly or use a simplified approach).
+// Browserless.io Token (Recommended for Vercel)
+const BROWSERLESS_TOKEN = process.env.BROWSERLESS_TOKEN;
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
@@ -22,21 +20,28 @@ app.post('/extract', async (req, res) => {
 
     let browser = null;
     try {
-        browser = await puppeteer.launch({
-            args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-        });
+        if (BROWSERLESS_TOKEN) {
+            // THE PRO WAY: Use Browserless (Guaranteed to work on Vercel)
+            browser = await puppeteer.connect({
+                browserWSEndpoint: `wss://chrome.browserless.io?token=${BROWSERLESS_TOKEN}`,
+            });
+        } else {
+            // THE LOCAL WAY: (May fail on some Vercel regions due to missing libs)
+            browser = await puppeteer.launch({
+                args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+                defaultViewport: chromium.defaultViewport,
+                executablePath: await chromium.executablePath(),
+                headless: chromium.headless,
+            });
+        }
 
         const page = await browser.newPage();
-        // Google Drive documents often require a higher timeout
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
-        // Scroll to trigger lazy loading of images
-        for (let i = 0; i < 12; i++) {
+        // Scroll to trigger lazy loading
+        for (let i = 0; i < 15; i++) {
             await page.evaluate((y) => window.scrollTo(0, y), i * 1200);
-            await new Promise(r => setTimeout(r, 1000));
+            await new Promise(r => setTimeout(r, 800));
         }
 
         const images = await page.evaluate(() => {
@@ -52,9 +57,6 @@ app.post('/extract', async (req, res) => {
             return res.status(400).json({ error: 'No images found. Ensure the link is valid and public.' });
         }
 
-        // To make it work seamlessly on Vercel (which has a 10s-60s timeout),
-        // we return the images to the client and let the client build the PDF.
-        // This is the "Best" way for serverless because it avoids heavy PDF processing on the server.
         res.status(200).json({ 
             status: 'Completed', 
             progress: 100,
@@ -64,15 +66,10 @@ app.post('/extract', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: `Browser Error: ${error.message}. Tip: Add a BROWSERLESS_TOKEN to Vercel for 100% reliability.` });
     } finally {
         if (browser) await browser.close();
     }
-});
-
-// Mock status for compatibility with the frontend's polling
-app.get('/status/:id', (req, res) => {
-    res.json({ status: 'Completed', progress: 100 });
 });
 
 module.exports = app;
